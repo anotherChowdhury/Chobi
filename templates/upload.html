@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+    <title>Upload An Image</title>
+</head>
+<body>
+<h1>File Uploader</h1>
+
+<form>
+    <input id="imageUploader" type="file" name="image" accept="image/*">
+    <input type="button" value="Upload" onclick="upload()">
+</form>
+
+<script>
+    function upload() {
+        console.log("upload() called");
+        // var formData = new FormData($('#imageUploader')[0]);
+        var formData = new FormData();
+        console.log($('#imageUploader')[0].files[0]);
+        formData.append('file', $('#imageUploader')[0].files[0]);
+        console.log(formData);
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:5000/image",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                console.log("success");
+                console.log(data);
+            },
+            error: function (response) {
+                console.log(response.responseJSON)
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

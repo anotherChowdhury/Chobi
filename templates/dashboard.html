@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DashBoard</title>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls=		"navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  		  		<span class="navbar-toggler-icon"></span>
+  			</button>
+
+  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  		  <ul class="navbar-nav mr-auto">
+  		  	 <li class="nav-item nav">
+  		      	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upload</button>
+
+				<!-- Modal -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  					<div class="modal-dialog" role="document">
+    					<div class="modal-content">
+      						<div class="modal-header">
+        						<h5 class="modal-title" id="exampleModalLabel">Upload Image</h5>
+        						<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#gallery').empty()" >
+          							<span aria-hidden="true">&times;</span>
+        						</button>
+      						</div>
+      						<div class="modal-body">
+      							<form>
+  									Select images: <input id="image_selected" type="file" onchange="preview_image(event)"  onclick="$('#gallery').empty()" name="img" multiple>
+								</form>
+    							
+ 									<div id="gallery">
+ 									<!-- images for preview goes here-->
+ 									</div>
+									
+      						</div>
+      						<div class="modal-footer">
+        						<button type="button" id="closeModal1" class="btn btn-secondary" data-dismiss="modal" onclick="$('#gallery').empty()">Close</button>
+        						<button type="button" class="btn btn-primary" onclick="upload()">Upload</button>
+      						</div>
+    					</div>
+  					</div>
+				</div>
+			</li>
+
+  		    	<li class="nav-item active">
+  		    	  <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+  		    	</li>
+ 
+
+  		    			    	
+   		   </ul>
+
+   		   <ul class="navbar-nav nav justify-content-end">
+   		   		<li class="nav-item ">
+  		      		<a id="signin-singout" href="#" class="nav-link" onclick="logout()">SignIn</a>
+  		    	</li>  		    	
+   		   </ul>
+
+
+
+   		   <!-- Button trigger modal -->
+
+<!-- 
+   		                                       <div class="overlay" style="position: absolute;transition: all .3s ease;opacity: 0;background-color: #eee;" >
+													<div class="text" style="color: white;font-family: sans-serif;
+														position: absolute;top: 50%;left: 50%;transform: translate(-50%,-50%);font-size: 20px;" >Left</div>			
+												</div> -->
+
+
+
+
+  		</div>
+	</nav>
+
+	<div class="container">
+    <div id="modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div id="modal-content" class="modal-content">
+            	<div id="imageContainer">
+            	</div>
+        	<div class="modal-footer">
+				<button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="delete_picuture($('#imageContainer').find('img').attr('id'))">Delete</button>
+			</div>
+        	</div>
+
+
+    	</div>
+    </div>
+	</div>
+
+	<div id = 'imageholder'>
+		<div id="myrow" class="row text-center">`
+		</div>
+
+	</div>
+
+	<script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous">
+    </script>
+
+    <script type="text/javascript">
+
+
+    function preview_image(event) {
+    	let imageList = event.target.files;
+    	let image_number = event.target.files.length;
+
+    	console.log('User Selected '+ image_number + ' Images');
+
+    	for (var i =0; i<image_number; i++) {
+
+    		 let image = imageList[i];
+    		 id = 'image' + i;
+
+
+    		 // console.log("<img src='"+link+`'class="img-thumbnail">`);
+
+    		 // let file_reader = new FileReader();
+    		 let link = URL.createObjectURL(image);
+
+
+    		 $('#gallery').append(`
+
+    		 	
+    		 	<div id="${id}">
+    		 		<img src="${link}" class="img-thumbnail">
+    		 		</br>
+    		 		<input type="radio" name="${id}" value="Public">Public</input>
+					<input type="radio" name="${id}" value="Private">Private</input>
+				</div>	
+    		 	`);
+
+    		
+    	    
+    	}
+
+	}
+
+
+    function viewimage(event) {
+        document.getElementById("imageContainer").innerHTML = `<img src="${event.target.src}" id="${event.target.id}" alt="Image">`;    
+    }
+	
+
+	// 		images = document.getElementById('gallery').getElementsByTagName('img');
+
+	// 		for(var i=0;i<images.length;i++){
+
+	// 			let blob = fetch(images[i].src).then(r => r.blob());
+
+	// 			console.log(blob);
+
+	// 			var file = new File([blob], "file");
+
+
+
+
+	// 			formData.append("file",file);
+
+	// 		}
+
+	// 		console.log(formData);
+
+	function upload(){
+
+			var formData = new FormData();
+			var fileInput = document.getElementById("image_selected");
+			var images = fileInput.files;
+			var file;
+
+
+
+			console.log(images.length);
+			for(var i=0;i<images.length;i++){
+
+				file = images.item(i);
+				console.log(file);
+				id = 'image' + i;
+				radioinput = document.getElementById(id);
+
+				// console.log(radioinput);
+				// console.log(radioinput.elements);
+
+				// console.log(radioinput.children[2].value);
+				// console.log(radioinput.children[2].checked);
+
+				// console.log(radioinput.children[3].value);
+				// console.log(radioinput.children[3].checked);
+
+				is_private =  $(`input[name=${id}]:checked`, `#${id}`).val();
+				if (is_private == 'Private'){
+					is_private = true;
+				}
+				else{
+					is_private = false;
+				}
+
+				console.log(is_private);
+
+				formData.append(("file"+i),file);
+				formData.append(("is_private"+i),is_private);
+
+			}
+    		for (var key of formData.entries()) {
+        		console.log(key[0] + ', ' + key[1]);
+    			}
+
+
+    		$.ajax({
+    			type:"POST",
+    			url:"http://127.0.0.1:5000/image",
+    			headers:{"Authorization": localStorage.getItem('token')},
+    			data: formData,
+    			contentType:false,
+    			cache:false,
+    			processData:false,
+    			success:function (data){
+                					let imageList = data.imageList;
+    								console.log(data);
+    				                // let imageholder = document.getElementById('imageholder');
+    				                let link = data.link;
+                					let rowdiv = document.getElementById("myrow");
+                					let	html;
+                		for(var i=0;i<imageList.length;i++){
+
+                					html += `
+                            <div class="col-3" >
+                                <div style="padding-top:10px;">
+                                    <img class="img-thumbnail" src="${imageList[i]}" style="width:200px; height:200px;" onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                    			<div class="overlay style="" >
+													<div class="text">Left</div>			
+												</div>
+                                </div>
+                             </div>
+                            `;
+
+                            rowdiv.innerHTML += html;
+                       }
+
+                       $('#closeModal').click();
+    			},
+            	error: function (response) {
+                	console.log(response.responseJSON)
+                }
+
+    		});
+}
+
+
+
+
+			
+
+
+
+
+    window.onload = getURL();
+
+    function getURL() {
+
+    	document.getElementById('signin-singout').innerHTML = "Sign Out";
+        $.ajax({
+            type: "GET",
+            url: "http://127.0.0.1:5000/showimages",
+            headers: {"Authorization": localStorage.getItem('token')},
+            success: function (data) {
+                let imageList = data.imageList;
+                let imageholder = document.getElementById('myrow');
+                let html = ``;
+                imageList.map(item => {
+                    html += `
+                            <div class="col-3" id="${item.image_id}">
+                                <div style="padding-top:10px;">
+                                    <img class="img-thumbnail" id="${item.image_id}" src="${item.link}" style="width:200px; height:200px;" onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                </div>
+                             </div>
+                            `;
+                    html += "\n";
+                });
+                imageholder.innerHTML = html;
+            },
+            error: function (response) {
+                console.log(response.responseJSON)
+
+            }
+        });
+    }
+
+    function logout(){
+    	console.log("I'm in");
+
+    	localStorage.clear();
+    	window.location.href = "login.html";
+
+
+    }
+
+
+        function delete_picuture(id){
+    		$.ajax({
+    			type:"POST",
+    			url:"http://127.0.0.1:5000/delete",
+    			headers:{"Authorization": localStorage.getItem('token')},
+    			data: JSON.stringify({'image_id':id}),
+    			contentType:'application/json',
+    			cache:false,
+    			processData:false,
+    			success:function (data){
+
+    				$('#closeModal').click();
+    				console.log(document.getElementById(data.id));
+    				document.getElementById(data.id).remove();
+    				console.log(`#${data.id}`);
+    				$(`#${data.id}`).remove();
+    				
+    			},
+
+    			error: function (response) {
+                	console.log(response.responseJSON);
+ 		           }
+
+    		});
+    	}
+
+
+    </script>
+
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

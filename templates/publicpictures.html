@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Public Images </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+    <div class="container">
+    <div id="modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div id="modal-content" class="modal-content">
+              <div id="imageContainer">
+              </div>
+          <div class="modal-footer">
+        <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  
+  <script type="text/javascript">
+    window.onload = function (){
+        $.ajax({
+          type:"GET",
+          url: "http://127.0.0.1:5000/public",
+          success: function (data){
+
+
+              let count = 1;
+            pictureList = data.pictures;
+            for (const [key, value] of Object.entries(pictureList)) {
+                user = key;
+                pictures = value;
+                console.log(pictures);
+  
+
+
+
+
+                document.body.innerHTML += `<div class="container" id="${user}"style="text-align:center;">
+                                              <h2>${user}'s Public Pictures</h2>  
+                                              <div id="myCarousel-${count}" class="carousel slide" data-interval="false" data-ride="carousel" style="background-color: grey !important;" >
+                                                  <!-- Indicators -->
+                                                  <ol class="carousel-indicators" id="list">
+                                                  </ol>
+
+                                                  <!-- Wrapper for slides -->
+                                                  <div class="carousel-inner" id="imageholder">    
+                                                  </div>
+
+                                                  <!-- Left and right controls -->
+                                                  <a class="left carousel-control" href="#myCarousel-${count}" data-slide="prev">
+                                                  <span class="glyphicon glyphicon-chevron-left"></span>
+                                                  <span class="sr-only">Previous</span>
+                                                  </a>
+                                                  <a class="right carousel-control" href="#myCarousel-${count}" data-slide="next">
+                                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                                    <span class="sr-only">Next</span>
+                                                  </a>
+                                              </div>
+                                            </div>`;
+
+
+                          sequence = document.querySelector(`#${user} #list`);
+                          imageholder = document.querySelector(`#${user} #imageholder`);
+                          sequencecount = 0;
+                          let rowid = user + 0;
+                          for (var i =0 ; i<pictures.length; i++) {
+                              if (sequence.childElementCount == 0){
+
+
+                                    
+                                    sequence.innerHTML = `<li data-target="#myCarousel-${count}" data-slide-to="${sequencecount}" class="active"></li>`;
+                                      sequencecount += 1;
+                      imageholder.innerHTML = `      <div class="item active" data-interval="false">
+                                                        <div class="row" id="${rowid}">
+                                                          <div class="col-xs-4">
+                                                            <img class="img-thumbnail" id="${user+i}" src="${pictures[i]}"onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg" style="width:200px; height:200px;">
+                                                          </div>
+                                                        </div>
+                                                      </div>`;      
+                                            }else if (document.getElementById(rowid).childElementCount < 3) {
+                                              
+                                              row = document.getElementById(rowid);
+                                              if (user =='umar') console.log(row.childElementCount);
+          
+                                              row.innerHTML += `
+                                                        <div class="col-xs-4">
+                                                           <img class="img-thumbnail" id="${user+i}" src="${pictures[i]}"onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg" style="width:200px; height:200px;">
+                                                        </div>
+                                                        `;
+                                          
+
+                                                            }else{
+
+                                                              console.log(user + " in the else condition & value of iteratior : " + i);
+
+                                                              row = document.getElementById(rowid);
+                                                              console.log(row.childElementCount);
+                                                              rowid += 1;
+
+
+                    sequence.innerHTML += `<li data-target="#myCarousel-${count}" data-slide-to="${sequencecount}"></li>`;
+
+
+                                imageholder.innerHTML += `<div class="item" data-interval="false">
+                                                            <div class="row" id="${rowid}">
+                                                              <div class="col-xs-4">
+                                                                <img class="img-thumbnail" id="${user+i}" src="${pictures[i]}"onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg" style="width:200px; height:200px;">
+                                                              </div>
+                                                            </div>
+                                                           </div> `
+                                                         }                                                              
+                                                       }
+                                                       count += 1; 
+                                                      }
+                                                    },
+                          error: function (response) {
+                            console.log(response.responseJSON)
+                          }
+
+        });
+    }
+
+
+    function viewimage(event) {
+        document.getElementById("imageContainer").innerHTML = `<img src="${event.target.src}" id="${event.target.id}" alt="Image">`;    
+    }
+
+  </script>
+
+
+          
+
+<!--             // console.log(pictureList['ovy']);
+
+
+
+
+            // pictureList = data.pictures;
+
+          //   userList = data.users;
+            
+
+          //   for(let i=0;i<userList.length;i++){
+
+
+
+              
+
+          //   // // container = document.getElementById(userList[i]).find("list");
+
+          //   console.log(sequence.childElementCount);
+          //   // sequence = $(`#${userList[i]} #list`);
+
+       
+
+          //   let count = 0;
+       
+          //   for(let j=0;j<pictureList.length;j++){
+          //       if (pictureList[j].name == userList[i]){ 
+                                        
+
+          //     }
+
+
+
+
+          //   }
+
+          // } -->
+
+
+
+
+
+</body>
+</html>

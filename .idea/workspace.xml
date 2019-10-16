@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="82541e5d-583a-4713-8a63-ae57c4caace6" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1QJYGzDOEkmA5SnpxB3CxJDjhdo" />
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+    </key>
+  </component>
+  <component name="RemoteSynchronizer">
+    <option name="targetMappings">
+      <list>
+        <TargetMappings>
+          <option name="name" value="Default" />
+        </TargetMappings>
+      </list>
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Flask server.Flask (app.py)">
+    <configuration name="dbreset" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Image-Upload" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dbreset.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Flask (app.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
+      <module name="Image-Upload" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Image-Upload" type="Python.FlaskServer">
+      <module name="Image-Upload" />
+      <option name="target" value="$PROJECT_DIR$/app.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flask server.Flask (app.py)" />
+        <item itemvalue="Python.dbreset" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82541e5d-583a-4713-8a63-ae57c4caace6" name="Default Changelist" comment="" />
+      <created>1567490075502</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1567490075502</updated>
+      <workItem from="1567490117021" duration="3052000" />
+      <workItem from="1567516831569" duration="2288000" />
+      <workItem from="1567531553707" duration="517000" />
+      <workItem from="1567532391313" duration="7851000" />
+      <workItem from="1567542017583" duration="192000" />
+      <workItem from="1567543059912" duration="1966000" />
+      <workItem from="1567579036850" duration="2593000" />
+      <workItem from="1567609790882" duration="7390000" />
+      <workItem from="1567660762573" duration="13172000" />
+      <workItem from="1567698878640" duration="9401000" />
+      <workItem from="1567712729365" duration="3146000" />
+      <workItem from="1567794251575" duration="6538000" />
+      <workItem from="1567841851234" duration="9269000" />
+      <workItem from="1567925783599" duration="1710000" />
+      <workItem from="1567956097063" duration="3004000" />
+      <workItem from="1567963079588" duration="4517000" />
+      <workItem from="1568019130179" duration="10492000" />
+      <workItem from="1568098411979" duration="668000" />
+      <workItem from="1568131169363" duration="4206000" />
+      <workItem from="1568138805880" duration="4247000" />
+      <workItem from="1568182932405" duration="5946000" />
+      <workItem from="1568888603064" duration="4763000" />
+      <workItem from="1569091111733" duration="2773000" />
+      <workItem from="1569173944582" duration="5089000" />
+      <workItem from="1569242615144" duration="2751000" />
+      <workItem from="1569259717227" duration="3045000" />
+      <workItem from="1569353617508" duration="1196000" />
+      <workItem from="1569429745732" duration="9279000" />
+      <workItem from="1569493940377" duration="5994000" />
+      <workItem from="1569573173448" duration="2994000" />
+      <workItem from="1569609910054" duration="150000" />
+      <workItem from="1569655061650" duration="5003000" />
+      <workItem from="1569660788724" duration="3351000" />
+      <workItem from="1569687869262" duration="631000" />
+      <workItem from="1569694350058" duration="690000" />
+      <workItem from="1570210721693" duration="2045000" />
+      <workItem from="1570256147095" duration="7734000" />
+      <workItem from="1570293597354" duration="5403000" />
+      <workItem from="1570424975141" duration="4428000" />
+      <workItem from="1570477346224" duration="2984000" />
+      <workItem from="1570513093630" duration="3491000" />
+      <workItem from="1570538841200" duration="3927000" />
+      <workItem from="1570643281821" duration="1768000" />
+      <workItem from="1570697379873" duration="747000" />
+      <workItem from="1571148400805" duration="2858000" />
+      <workItem from="1571164848020" duration="1986000" />
+      <workItem from="1571201984767" duration="1540000" />
+      <workItem from="1571209530289" duration="621000" />
+      <workItem from="1571248674172" duration="1542000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Image_Upload$Image_Upload.coverage" NAME="Image-Upload Coverage Results" MODIFIED="1567537811345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Image_Upload$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1571209547019" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Image_Upload$dbreset.coverage" NAME="dbreset Coverage Results" MODIFIED="1570525258989" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
