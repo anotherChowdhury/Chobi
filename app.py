@@ -14,7 +14,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__, template_folder="templates")
 CORS(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:opensesame@127.0.0.1:3306/imageUploader'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:opensesame@127.0.0.1:5100/imageUploader'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = False
 
@@ -65,6 +65,8 @@ class Picture(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey('user.uid'))
     picture_link = db.Column(db.String(255), nullable=False)
     is_private = db.Column(db.Boolean, default=False)
+    picture_caption = db.Column(db.String(255))
+    picture_description = db.Column(db.Text)
 
     def __init__(self, id, link, **kwargs):
         super(Picture, self).__init__(**kwargs)
@@ -94,12 +96,17 @@ def upload_image():
     permission = request.form
     imageList = []
     # keyList = sorted(images.keys())
-    # print(keyList)
+    print(permission)
     # print(images['is_private0'])
-    for key, privacy in zip(images.keys(), permission.keys()):
+    i = 0
+    for key in images.keys():
         file = images[key]
-        is_private = permission[privacy]
-        print(is_private)
+        hardcoded_privacy_key = "is_private" + str(i)
+        hardcoded_caption_key = "caption" + str(i)
+
+        is_private = permission[hardcoded_privacy_key]
+        caption = permission[hardcoded_caption_key]
+        print(is_private + " " + caption)
         if file.filename == '':
             return make_response(jsonify({
                 "msg": 'File name not found'
@@ -117,11 +124,11 @@ def upload_image():
                 is_private = True
             else:
                 is_private = False
-            picture = Picture(id, path, is_private=is_private)
+            picture = Picture(id, path, is_private=is_private, picture_caption=caption)
             db.session.add(picture)
             db.session.commit()
             imageList.append(('http://127.0.0.1:5000' + url_for('static', filename=name)))
-
+            i += 1
     return make_response(jsonify({
         'imageList': imageList
     }), 200)
@@ -235,11 +242,16 @@ def public_images():
     }), 200)
 
 
-if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+@app.route('/search', methods=["POST"])
+def search():
+    data = request.get_json()
+    print(data)
+    data = data["search"]
+    images = search_dashboard(data)
+    return make_response(jsonify({
+        "images": images
+    }))
 
-
-##########################Database Functions CRUD
 
 def verify_user(email, password):
     print(email, password)
@@ -254,7 +266,7 @@ def verify_user(email, password):
 
 
 def get_user_id(token):
-    print(token)
+    # print(token)
     # token = token.encode()
     token = jwt.decode(token, "topSecret", algorithm='HS256')
     id = token["sub"]
@@ -274,3 +286,21 @@ def get_public_pictures():
     for user in users:
         all_public_images[user.name] = [pic.picture_link for pic in user.pictures if not pic.is_private]
     return all_public_images
+
+
+def search_dashboard(search_for):
+    id = get_user_id(request.headers.get("Authorization"))
+    user = User.query.get(id)
+    print(user.name)
+    images = []
+    for pic in user.pictures:
+        if pic.picture_caption.lower().find(search_for.lower()) != -1:
+            print(pic.picture_caption)
+            images.append({"image_id": pic.pid, "caption": pic.picture_caption, "link": pic.picture_link})
+    return images
+
+
+if __name__ == '__main__':
+    app.run(debug=True, threaded=True)
+
+##########################Database Functions CRUD

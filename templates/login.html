@@ -1,12 +1,10 @@
 <html>
+
 <head>
-	
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
 
-
-	
 
 </head>
 
@@ -16,64 +14,66 @@
 
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  
-  			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls=		"navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-  		  		<span class="navbar-toggler-icon"></span>
-  			</button>
 
-  		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-  		  <ul class="navbar-nav mr-auto">
-  		    	<li class="nav-item active">
-  		    	  <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
-  		    	</li>
-  		    	<li class="nav-item nav">
-  		      		<a class="nav-link" href="signup.html">SignUp</a>
-  		    	</li>		    	
-<!--    		   </ul>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-   		   <ul class="nav justify-content-end"> -->
-   		   		<li class="nav-item active justify-content-end">
-  		      		<a class="nav-link" href="login.html">SignIn</a>
-  		    	</li>  		    	
-   		   </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item nav">
+                    <a class="nav-link" href="signup.html">SignUp</a>
+                </li>
+                <!--    		   </ul>
+
+              <ul class="nav justify-content-end"> -->
+                <li class="nav-item active ">
+                    <a class="nav-link" href="login.html">SignIn<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="publicpictures.html" id="public_pictures">Public Pictures</a>
+                </li>
+            </ul>
 
 
-
-  		</div>
+        </div>
 	</nav>
 
 
+    <div class="d-flex justify-content-center align-items-center" style="padding-top: 20%">
 
-<div class="d-flex justify-content-center align-items-center" style="padding-top: 20%">
+
+        <form>
+            <div class="form-group row ">
+
+                <div class="colFormLabelLg	">
+                    <input class="form-control" id="inputEmail3" placeholder="Email" type="email">
+                </div>
+            </div>
+            <div class="form-group row">
+
+                <div class="colFormLabelLg">
+                    <input class="form-control" id="inputPassword3" placeholder="Password" type="password">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="colFormLabelLg">
+                    <button class="btn btn-primary" onclick="logins()" type="button">Sign in</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
 
 
-	<form >
-  		<div class="form-group row ">
-    
-    			<div class="colFormLabelLg	">
-      				<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-    			</div>
-  		</div>
-  		<div class="form-group row">
-
-    			<div class="colFormLabelLg">
-      				<input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-    			</div>
-  		</div>
-  
-  		<div class="form-group row"  >
-    		<div class="colFormLabelLg">
-      			<button type="button" class="btn btn-primary" onclick="logins()">Sign in</button>
-    		</div>
-  		</div>
-	</form>
-
-</div>
-
-	
-	<script>
-		
-		function logins(){
+    <script>
+		function logins() {
 			let email = document.getElementById('inputEmail3').value;
 			let password = document.getElementById('inputPassword3').value;
 
@@ -81,45 +81,46 @@
 			console.log(password);
 
 			$.ajax({
-            type: "POST",
-            url: "http://127.0.0.1:5000/login",
-            data: JSON.stringify({"email": email, "password": password}),
-            contentType: 'application/json',
-            cache: false,
-            processData: false,
-            success: function (data) {
-                console.log(data)
-                window.localStorage.setItem("token", data.msg);
-                window.location.href = "dashboard.html";
-            },
-            error: function (response) {
-                console.log(response.responseJSON)
-            }
-        });
+				type: "POST",
+				url: "http://127.0.0.1:5000/login",
+				data: JSON.stringify({
+					"email": email,
+					"password": password
+				}),
+				contentType: 'application/json',
+				cache: false,
+				processData: false,
+				success: function (data) {
+					console.log(data)
+					window.localStorage.setItem("token", data.msg);
+					window.location.href = "dashboard.html";
+				},
+				error: function (response) {
+					console.log(response.responseJSON)
+				}
+			});
 
 		}
-
-
-
 	</script>
 
 
-	<script
-            src="https://code.jquery.com/jquery-3.4.1.js"
+    <script crossorigin="anonymous"
             integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-            crossorigin="anonymous">
+            src="https://code.jquery.com/jquery-3.4.1.js">
     </script>
 
 
+    <script crossorigin="anonymous"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
 
-
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
 
 
 </body>
+
 </html>
