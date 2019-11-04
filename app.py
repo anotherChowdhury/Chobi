@@ -247,10 +247,16 @@ def search():
     data = request.get_json()
     print(data)
     data = data["search"]
-    images = search_dashboard(data)
-    return make_response(jsonify({
+    if request.headers.get("Authorization"):
+        images = search_dashboard(data)
+        return make_response(jsonify({
         "images": images
-    }))
+        }), 200)
+    else:
+        images = search_public_pictures(data)
+        return make_response(jsonify({
+            "images": images
+        }), 200)
 
 
 def verify_user(email, password):
@@ -296,6 +302,15 @@ def search_dashboard(search_for):
     for pic in user.pictures:
         if pic.picture_caption.lower().find(search_for.lower()) != -1:
             print(pic.picture_caption)
+            images.append({"image_id": pic.pid, "caption": pic.picture_caption, "link": pic.picture_link})
+    return images
+
+
+def search_public_pictures(search_for):
+    pictures = Picture.query.all()
+    images = []
+    for pic in pictures:
+        if pic.picture_caption.lower().find(search_for.lower()) != -1 and not pic.is_private:
             images.append({"image_id": pic.pid, "caption": pic.picture_caption, "link": pic.picture_link})
     return images
 
