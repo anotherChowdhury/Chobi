@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Public Images </title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
+
 <body>
+<script crossorigin="anonymous" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-            class="navbar-toggler"
-            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+            class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -26,9 +30,6 @@
             <li class="nav-item nav">
                 <a class="nav-link" href="signup.html">SignUp</a>
             </li>
-            <!--    		   </ul>
-
-          <ul class="nav justify-content-end"> -->
             <li class="nav-item active ">
                 <a class="nav-link" href="login.html">SignIn<span class="sr-only">(current)</span></a>
             </li>
@@ -41,18 +42,17 @@
     </div>
 </nav>
 
-    <div class="container">
+<div class="container">
     <div id="modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-         aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg">
-            <div id="modal-content" class="modal-content">
-              <div id="imageContainer">
-              </div>
+            <div class="modal-content" id="modal-content">
+                <div id="imageContainer">
+                </div>
           <div class="modal-footer">
-        <button type="button" id="closeModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+              <button class="btn btn-secondary" data-dismiss="modal" id="closeModal" type="button">Close</button>
           </div>
+            </div>
 
 
       </div>
@@ -60,27 +60,27 @@
   </div>
 
 
-  
+
   <script type="text/javascript">
-    window.onload = function (){
-        $.ajax({
-          type:"GET",
-          url: "http://127.0.0.1:5000/public",
-          success: function (data){
+    window.onload = function () {
+      $.ajax({
+        type: "GET",
+        url: "http://127.0.0.1:5000/public",
+        success: function (data) {
 
 
-              let count = 1;
-            pictureList = data.pictures;
-            for (const [key, value] of Object.entries(pictureList)) {
-                user = key;
-                pictures = value;
-                console.log(pictures);
-  
+          let count = 1;
+          pictureList = data.pictures;
+          for (const [key, value] of Object.entries(pictureList)) {
+            user = key;
+            pictures = value;
+            console.log(pictures);
 
 
 
 
-                document.body.innerHTML += `<div class="container" id="${user}"style="text-align:center;">
+
+            document.body.innerHTML += `<div class="container" id="${user}"style="text-align:center;">
                                               <h2>${user}'s Public Pictures</h2>  
                                               <div id="myCarousel-${count}" class="carousel slide" data-interval="false" data-ride="carousel" style="background-color: grey !important;" >
                                                   <!-- Indicators -->
@@ -104,118 +104,119 @@
                                             </div>`;
 
 
-                          sequence = document.querySelector(`#${user} #list`);
-                          imageholder = document.querySelector(`#${user} #imageholder`);
-                          sequencecount = 0;
-                          let rowid = user + 0;
-                          for (var i =0 ; i<pictures.length; i++) {
-                              if (sequence.childElementCount == 0){
+            sequence = document.querySelector(`#${user} #list`);
+            imageholder = document.querySelector(`#${user} #imageholder`);
+            sequencecount = 0;
+            let rowid = user + 0;
+            for (var i = 0; i < pictures.length; i++) {
+              if (sequence.childElementCount == 0) {
 
 
-                                    
-                                    sequence.innerHTML = `<li data-target="#myCarousel-${count}" data-slide-to="${sequencecount}" class="active"></li>`;
-                                      sequencecount += 1;
-                      imageholder.innerHTML = `      <div class="item active" data-interval="false">
+
+                sequence.innerHTML =
+                  `<li data-target="#myCarousel-${count}" data-slide-to="${sequencecount}" class="active"></li>`;
+                sequencecount += 1;
+                imageholder.innerHTML = `      <div class="carousel-item active" data-interval="false">
                                                         <div class="row" id="${rowid}">
-                                                          <div class="col-xs-4">
+                                                          <div class="col-sm">
                                                             <img class="img-thumbnail" id="${user+i}" src="${pictures[i]}"onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg" style="width:200px; height:200px;">
                                                           </div>
                                                         </div>
-                                                      </div>`;      
-                                            }else if (document.getElementById(rowid).childElementCount < 3) {
-                                              
-                                              row = document.getElementById(rowid);
-                                              if (user =='umar') console.log(row.childElementCount);
-          
-                                              row.innerHTML += `
-                                                        <div class="col-xs-4">
+                                                      </div>`;
+              } else if (document.getElementById(rowid).childElementCount < 3) {
+
+                row = document.getElementById(rowid);
+                if (user == 'umar') console.log(row.childElementCount);
+
+                row.innerHTML += `
+                                                        <div class="col-sm">
                                                            <img class="img-thumbnail" id="${user+i}" src="${pictures[i]}"onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg" style="width:200px; height:200px;">
                                                         </div>
                                                         `;
-                                          
-
-                                                            }else{
-
-                                                              console.log(user + " in the else condition & value of iteratior : " + i);
-
-                                                              row = document.getElementById(rowid);
-                                                              console.log(row.childElementCount);
-                                                              rowid += 1;
 
 
-                    sequence.innerHTML += `<li data-target="#myCarousel-${count}" data-slide-to="${sequencecount}"></li>`;
+              } else {
+
+                console.log(user + " in the else condition & value of iteratior : " + i);
+
+                row = document.getElementById(rowid);
+                console.log(row.childElementCount);
+                rowid += 1;
 
 
-                                imageholder.innerHTML += `<div class="item" data-interval="false">
+                sequence.innerHTML +=
+                  `<li data-target="#myCarousel-${count}" data-slide-to="${sequencecount}"></li>`;
+
+
+                imageholder.innerHTML += `<div class="carousel-item" data-interval="false">
                                                             <div class="row" id="${rowid}">
-                                                              <div class="col-xs-4">
+                                                              <div class="col-sm">
                                                                 <img class="img-thumbnail" id="${user+i}" src="${pictures[i]}"onclick="viewimage(event)" data-toggle="modal" data-target=".bd-example-modal-lg" style="width:200px; height:200px;">
                                                               </div>
                                                             </div>
                                                            </div> `
-                                                         }                                                              
-                                                       }
-                                                       count += 1; 
-                                                      }
-                                                    },
-                          error: function (response) {
-                            console.log(response.responseJSON)
-                          }
+              }
+            }
+            count += 1;
+          }
+        },
+        error: function (response) {
+          console.log(response.responseJSON)
+        }
 
-        });
+      });
     }
 
 
     function viewimage(event) {
-        document.getElementById("imageContainer").innerHTML = `<img src="${event.target.src}" id="${event.target.id}" alt="Image">`;    
+      document.getElementById("imageContainer").innerHTML =
+        `<img src="${event.target.src}" id="${event.target.id}" alt="Image">`;
     }
-
   </script>
 
-
-          
 
 <!--             // console.log(pictureList['ovy']);
 
 
 
 
-            // pictureList = data.pictures;
+          // pictureList = data.pictures;
 
-          //   userList = data.users;
-            
-
-          //   for(let i=0;i<userList.length;i++){
+        //   userList = data.users;
 
 
-
-              
-
-          //   // // container = document.getElementById(userList[i]).find("list");
-
-          //   console.log(sequence.childElementCount);
-          //   // sequence = $(`#${userList[i]} #list`);
-
-       
-
-          //   let count = 0;
-       
-          //   for(let j=0;j<pictureList.length;j++){
-          //       if (pictureList[j].name == userList[i]){ 
-                                        
-
-          //     }
+        //   for(let i=0;i<userList.length;i++){
 
 
 
 
-          //   }
 
-          // } -->
+        //   // // container = document.getElementById(userList[i]).find("list");
+
+        //   console.log(sequence.childElementCount);
+        //   // sequence = $(`#${userList[i]} #list`);
+
+
+
+        //   let count = 0;
+
+        //   for(let j=0;j<pictureList.length;j++){
+        //       if (pictureList[j].name == userList[i]){
+
+
+        //     }
+
+
+
+
+        //   }
+
+        // } -->
 
 
 
 
 
 </body>
+
 </html>

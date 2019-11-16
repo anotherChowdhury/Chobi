@@ -1,13 +1,12 @@
 from app import db, User,Picture
 
 if __name__ == '__main__':
-    id = 1
-    pictures = Picture.query.all()
-    images = []
-    for pic in pictures:
-        if pic.picture_caption.lower().find('ZARA'.lower()) != -1 and not pic.is_private:
-            images.append({"image_id": pic.pid, "Caption": pic.picture_caption, "link": pic.picture_link})
-    print(images)
+
+    # db.session.execute("ALTER TABLE picture ADD FULLTEXT (picture_caption, picture_description)")
+    result = db.session.execute(
+        "SELECT * FROM picture WHERE is_private=false AND MATCH (picture_caption, picture_description) AGAINST ('Zara boots' IN NATURAL LANGUAGE MODE) ")
+    for r in result:
+        print(r)
 
     # db.drop_all()
     # db.create_all()

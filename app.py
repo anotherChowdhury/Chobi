@@ -3,11 +3,12 @@ from datetime import datetime, timedelta
 import os
 from datetime import datetime, timedelta
 from functools import wraps
-
 import jwt
 from flask import Flask, request, make_response, jsonify, url_for
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
+from flask_migrate import Migrate
 
 UPLOAD_FOLDER = './static'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
@@ -72,6 +73,10 @@ class Picture(db.Model):
         super(Picture, self).__init__(**kwargs)
         self.picture_link = link
         self.owner_id = id
+
+
+migrate = Migrate(app, db)
+
 
 
 def allowed_file(filename):
@@ -170,7 +175,8 @@ def show_images():
     for particular_picture in pictures:
         imageList.append({
             "image_id": particular_picture.pid,
-            "link": particular_picture.picture_link})
+            "link": particular_picture.picture_link,
+            "caption": particular_picture.picture_caption})
     print(imageList)
     return make_response(jsonify({
         "imageList": imageList
@@ -307,10 +313,10 @@ def search_dashboard(search_for):
 
 
 def search_public_pictures(search_for):
-    pictures = Picture.query.all()
+    pictures = db.session.execute(
+        "SELECT * FROM picture WHERE is_private=false AND MATCH (picture_caption, picture_description) AND is_private=0 AGAINST ('" + search_for + "' IN NATURAL LANGUAGE MODE)")
     images = []
     for pic in pictures:
-        if pic.picture_caption.lower().find(search_for.lower()) != -1 and not pic.is_private:
             images.append({"image_id": pic.pid, "caption": pic.picture_caption, "link": pic.picture_link})
     return images
 
