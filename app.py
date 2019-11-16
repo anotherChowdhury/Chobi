@@ -67,8 +67,6 @@ class Picture(db.Model):
     picture_link = db.Column(db.String(255), nullable=False)
     is_private = db.Column(db.Boolean, default=False)
     picture_caption = db.Column(db.String(255))
-    picture_description = db.Column(db.Text)
-
     def __init__(self, id, link, **kwargs):
         super(Picture, self).__init__(**kwargs)
         self.picture_link = link
